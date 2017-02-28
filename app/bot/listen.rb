@@ -6,7 +6,7 @@ Facebook::Messenger::Subscriptions.subscribe(access_token: ENV["ACCESS_TOKEN"])
 # message.sent_at     # => 2016-04-22 21:30:36 +0200
 # message.text        # => 'Hello, bot!'
 Bot.on :message do |message|
-  client = Facebook::Clien.new
+  client = Facebook::Client.new
   user_data = client.get_user(message.sender["id"])
 
   p user_data
