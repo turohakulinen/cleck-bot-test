@@ -23,3 +23,7 @@ module CleckBotTest
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+# Auto-load /bot and its subdirectories
+config.paths.add File.join("app", "bot"), glob: File.join("**","*.rb")
+config.autoload_paths += Dir[Rails.root.join("app", "bot", "*")]
