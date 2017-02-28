@@ -22,13 +22,13 @@ Bot.on :message do |message|
       }
     end
   else
-
+    quick_replies = []
   end
 
   Bot.deliver({
     recipient: message.sender,
     message: {
-      text: "U r at level #{node.name} #{node.description}"
+      text: "U r at level #{node.name} #{node.description}",
       quick_replies: quick_replies
     }
   }, access_token: ENV["ACCESS_TOKEN"])
