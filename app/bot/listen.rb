@@ -9,16 +9,27 @@ Facebook::Messenger::Subscriptions.subscribe(access_token: ENV["ACCESS_TOKEN"])
 Bot.on :message do |message|
   client = Facebook::Client.new
   user_data = client.get_user(message.sender["id"])
-
-  p user_data
-  user_name = user_data["name"]
+  user_name = user_data["first_name"]
   gender = user_data["gender"]
-  political = user_data["political"]
-  quotes = user_data["quotes"]
+  node = Node.where("question_s = ?", message.text).first_name
+  node = Node.first if !node
+  if node.nodes.length > 0
+    quick_replies = node.nodes.map do |n|
+      {
+          content_type: 'text',
+          title: n.question_s,
+          payload: 'HARMLESS'
+      }
+    end
+  else
+
+  end
+
   Bot.deliver({
     recipient: message.sender,
     message: {
-      text: "Hello #{user_name}, you r #{gender} and belive in #{political}. #{quotes} + fb is scary"
+      text: "U r at level #{node.name} #{node.description}"
+      quick_replies: quick_replies
     }
   }, access_token: ENV["ACCESS_TOKEN"])
 end
