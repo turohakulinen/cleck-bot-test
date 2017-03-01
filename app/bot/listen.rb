@@ -11,14 +11,14 @@ Bot.on :message do |message|
   user_data = client.get_user(message.sender["id"])
   user_name = user_data["first_name"]
   gender = user_data["gender"]
-  node = Node.where("question_s = ?", message.text).first_name
+  node = Node.where("question_s = ?", message.text).first
   node = Node.first if !node
   if node.nodes.length > 0
     quick_replies = node.nodes.map do |n|
       {
           content_type: 'text',
           title: n.question_s,
-          payload: 'HARMLESS'
+          payload: n.question_s
       }
     end
   else
