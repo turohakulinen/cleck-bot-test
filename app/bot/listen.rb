@@ -24,12 +24,12 @@ Bot.on :message do |message|
   else
     quick_replies = []
   end
-
+  message = {
+    text: "U r at level #{node.name}. #{node.description}"
+  }
+  message[:quick_replies] = quick_replies if quick_replies.length > 0
   Bot.deliver({
     recipient: message.sender,
-    message: {
-      text: "U r at level #{node.name} #{node.description}",
-      quick_replies: quick_replies
-    }
+    message: message
   }, access_token: ENV["ACCESS_TOKEN"])
 end
