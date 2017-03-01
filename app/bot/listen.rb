@@ -30,6 +30,6 @@ Bot.on :message do |message|
   message[:quick_replies] = quick_replies if quick_replies.length > 0
   Bot.deliver({
     recipient: message.sender,
-    message: message
+    message: message_out
   }, access_token: ENV["ACCESS_TOKEN"])
 end
