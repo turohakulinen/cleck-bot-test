@@ -22,6 +22,7 @@ top.save!
       answer = Node.new(
           name: Faker::StarWars.planet,
           description: Faker::StarWars.quote,
+          question_s: "Child#{i}Child#{j}Child#{x}"
         )
       answer.node = child2
       answer.save!
