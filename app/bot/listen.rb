@@ -24,7 +24,7 @@ Bot.on :message do |message|
   else
     quick_replies = []
   end
-  message = {
+  message_out = {
     text: "U r at level #{node.name}. #{node.description}"
   }
   message[:quick_replies] = quick_replies if quick_replies.length > 0
