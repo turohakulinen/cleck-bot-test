@@ -24,9 +24,7 @@ Bot.on :message do |message|
   else
     quick_replies = []
   end
-  message_out = {
-    text: "U r at level #{node.name}. #{node.description}"
-  }
+  message_out = node.answer.to_message
   message_out[:quick_replies] = quick_replies if quick_replies.length > 0
   Bot.deliver({
     recipient: message.sender,

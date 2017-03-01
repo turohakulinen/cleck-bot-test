@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228173542) do
+ActiveRecord::Schema.define(version: 20170301114830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "node_id"
+    t.string   "photo"
+    t.string   "type"
+    t.text     "message"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["node_id"], name: "index_answers_on_node_id", using: :btree
+  end
 
   create_table "nodes", force: :cascade do |t|
     t.string   "question_s"
@@ -28,5 +39,6 @@ ActiveRecord::Schema.define(version: 20170228173542) do
     t.index ["node_id"], name: "index_nodes_on_node_id", using: :btree
   end
 
+  add_foreign_key "answers", "nodes"
   add_foreign_key "nodes", "nodes"
 end
